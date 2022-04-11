@@ -1,13 +1,6 @@
 const btnExportToExcelChi = document.getElementById('btnExportToExcelChi');
 
-let columnDefs = [
-    { field: "LimInf" },
-    { field: "LimSup" },
-    { field: "MC" },
-    { field: "Fe" },
-    { field: "Fo" },
-    { field: "Estadístico" },
-];
+let gridOptions = {};
 
 const truncateDecimals = (number, digits) => {
     const multiplier = Math.pow(10, digits);
@@ -50,6 +43,15 @@ const getNumbersNorm = () => {
 const generarTabla = (filas) => {
     const eGridDiv = document.querySelector('#gridFrecuencia');
 
+    let columnDefs = [
+        { field: "LimInf" },
+        { field: "LimSup" },
+        { field: "MC" },
+        { field: "Fe" },
+        { field: "Fo" },
+        { field: "Estadístico" },
+    ];
+
     let rowData = [];
     filas.forEach((fila) => {
         let row = {
@@ -63,7 +65,7 @@ const generarTabla = (filas) => {
         rowData.push(row);
     })
 
-    let gridOptions = {
+    gridOptions = {
         columnDefs,
         rowData
     };
