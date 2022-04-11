@@ -1,6 +1,7 @@
 const btnSimular = document.getElementById("btnUniSim");
 const btnUniDelete = document.getElementById("btnUniDel");
-// const btnExportToExcelRandVar = document.getElementById("btnExportToExcelRandVar");
+const btnExportToExcelRandVar = document.getElementById("btnExportToExcelRandVar");
+const btnExportToExcelChi = document.getElementById("btnExportToExcelChi");
 
 const truncateDecimals = (number, digits) => {
     const multiplier = Math.pow(10, digits);
@@ -11,7 +12,8 @@ const distribucionUniforme = (a, b) => {
     return truncateDecimals(Math.random() * (b - a) + a, 4);
 }
 
-let gridOptions = {};
+let gridRandVarOptions = {};
+let gridChiOptions = {};
 
 const generacionVariablesAleatoriasUniformes = (a, b, n) => {
     let variablesAleatorias = [];
@@ -38,9 +40,9 @@ const simularUniforme = () => {
     let b = parseFloat(document.getElementById("unif-b").value);
     let n = parseInt(document.getElementById("unif-n").value);
 
-    // A puede ser igual que B????
     if (typeof a === "undefined" || typeof b === "undefined" || typeof n === "undefined") return alert("Por favor, ingrese todos los datos.");
     if (isNaN(a) || isNaN(b) || isNaN(n)) return alert("Por favor, ingrese números.");
+    // A puede ser igual que B????
     if (a > b) return alert("El valor de 'a' debe ser menor que el valor de 'b'");
     if (n < 1) return alert("El valor de 'n' debe ser mayor que 0");
 
@@ -56,17 +58,17 @@ const simularUniforme = () => {
         { field: "Aleatorio" },
     ];
 
-    gridOptions = {
+    gridRandVarOptions = {
         columnDefs,
         rowData: variablesAleatorias
     };
 
-    new agGrid.Grid(eGridDiv, gridOptions);
-    // btnExportToExcelRandVar.removeAttribute("hidden");
+    new agGrid.Grid(eGridDiv, gridRandVarOptions);
+    btnExportToExcelRandVar.removeAttribute("hidden");
 }
 
 const borrarTablaUniforme = () => {
-    btnExportToExcelRandVar.setAttribute("hidden");
+    btnExportToExcelRandVar.setAttribute("hidden", "hidden");
     const eGridDiv = document.querySelector('#gridVariable');
 
     let child = eGridDiv.lastElementChild;
@@ -76,13 +78,17 @@ const borrarTablaUniforme = () => {
     }
 }
 
-const exportToExcel = () => {
-    gridOptions.api.exportDataAsExcel();
+// Se podría parametrizar esto para ver qué exportar???
+// Tarda mucho en exportar cuando hay muchos datos (con 100k es bastante aceptable el tiempo)
+const exportToExcelRandVar = () => {
+    gridRandVarOptions.api.exportDataAsExcel();
 }
 
-// btnExportToExcelRandVar.addEventListener("click", exportToExcel);
+const exportToExcelChi = () => {
+    gridChiOptions.api.exportDataAsExcel();
+}
 
-// Ver que este click no está bien, sino que es para prueba
-btnUniDelete.addEventListener("click", exportToExcel);
-// btnUniDelete.addEventListener("click", borrarTablaUniforme);
+btnExportToExcelRandVar.addEventListener("click", exportToExcelRandVar);
+btnExportToExcelChi.addEventListener("click", exportToExcelChi);
+btnUniDelete.addEventListener("click", borrarTablaUniforme);
 btnSimular.addEventListener("click", simularUniforme);

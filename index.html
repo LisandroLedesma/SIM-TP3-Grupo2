@@ -57,12 +57,15 @@
         <div class="container-fluid">
             <hr>
             <label style="display: block;" for="unif-a">A:</label>
-            <input id="unif-a" placeholder="Ej: 10" style="margin: 0.5em;" type="number" />
+            <!-- <input id="unif-a" placeholder="Ej: 10" style="margin: 0.5em;" type="number" /> -->
+            <input id="unif-a" placeholder="Ej: 10" style="margin: 0.5em;" type="number" value="10"/>
             <label style="display: block;" for="unif-b">B:</label>
-            <input id="unif-b" placeholder="Ej: 20" style="margin: 0.5em;" type="number" />
+            <!-- <input id="unif-b" placeholder="Ej: 20" style="margin: 0.5em;" type="number" /> -->
+            <input id="unif-b" placeholder="Ej: 20" style="margin: 0.5em;" type="number" value="20"/>
 
             <label style="display: block;" for="unif-n">N:</label>
-            <input id="unif-n" placeholder="Cantidad de números" style="margin: 0.5em;" type="number" />
+            <!-- <input id="unif-n" placeholder="Cantidad de números" style="margin: 0.5em;" type="number" /> -->
+            <input id="unif-n" placeholder="Cantidad de números" style="margin: 0.5em;" type="number" value="10"/>
 
             <label style="display: block;" for="intUnif">Intervalos:</label>
             <select id="intUnif" class="form-select" aria-label="Default select example">
@@ -157,9 +160,8 @@
 
     <div class="row justify-content-center">
         <div class="col-8">
-            <div id="gridVariable" class="ag-theme-alpine my-2" style="height: 500px; width: 100%; ">
-                <!-- <button hidden id="btnExportToExcelRandVar" style="margin-bottom: 5px; font-weight: bold">Exportar a Excel</button> -->
-            </div>
+            <div id="gridVariable" class="ag-theme-alpine my-2" style="height: 500px; width: 100%;"></div>
+            <button hidden="hidden" id="btnExportToExcelRandVar" class="btn btn-info" style="margin-bottom: 5px; font-weight: bold">Exportar a Excel</button>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -167,6 +169,7 @@
             <div id="gridFrecuencia" class="ag-theme-alpine my-2" style="height: 500px; width: 100%;"></div>
             <span id="dataL"></span>
             <span id="resL"></span>
+            <button hidden="hidden" id="btnExportToExcelChi" class="btn btn-info" style="margin-bottom: 5px; font-weight: bold">Exportar a Excel</button>
         </div>
     </div>
     <div class="row justify-content-center">
