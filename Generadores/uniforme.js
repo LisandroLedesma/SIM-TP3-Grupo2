@@ -3,6 +3,10 @@ const btnUniDelete = document.getElementById("btnUniDel");
 const btnExportToExcelRandVar = document.getElementById("btnExportToExcelRandVar");
 const btnExportToExcelChi = document.getElementById("btnExportToExcelChi");
 
+let gridRandVarOptions = {};
+let gridChiOptions = {};
+let randUnif = [];
+
 const truncateDecimals = (number, digits) => {
     const multiplier = Math.pow(10, digits);
     return Math.trunc(number * multiplier) / multiplier;
@@ -12,8 +16,6 @@ const distribucionUniforme = (a, b) => {
     return truncateDecimals(Math.random() * (b - a) + a, 4);
 }
 
-let gridRandVarOptions = {};
-let gridChiOptions = {};
 
 const generacionVariablesAleatoriasUniformes = (a, b, n) => {
     let variablesAleatorias = [];
@@ -48,6 +50,7 @@ const simularUniforme = () => {
 
     try {
         variablesAleatorias = generacionVariablesAleatoriasUniformes(a, b, n);
+        randUnif = [...variablesAleatorias];
     }
     catch (error) {
         alert('Oops! Ha ocurrido un error');
