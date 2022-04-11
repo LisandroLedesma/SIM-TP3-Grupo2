@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <title> SIM - TP3 </title>
 
     <!-- CDN libreria tablas -->
@@ -55,11 +56,26 @@
     <div class="collapse" id="collapseUniforme">
         <div class="container-fluid">
             <hr>
-            <span> Inputs </span>
+            <label style="display: block;" for="unif-a">A:</label>
+            <input id="unif-a" placeholder="Semilla" style="margin: 0.5em;" type="number" />
+            <label style="display: block;" for="unif-b">B:</label>
+            <input id="unif-b" placeholder="c" style="margin: 0.5em;" type="number" />
+
+            <label style="display: block;" for="unif-n">N:</label>
+            <input id="unif-n" placeholder="Cantidad de nros" style="margin: 0.5em;" type="number" />
+
+            <label style="display: block;" for="intUnif">Intervalos:</label>
+            <select id="intUnif" class="form-select" aria-label="Default select example">
+                <option selected></option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
             <hr>
             <button type="button" class="btn btn-success" id="btnUniSim">Simular</button>
             <button type="button" class="btn btn-danger" id="btnUniDel">Reiniciar</button>
-            <button type="button" class="btn btn-info" id="btnUniTest"> Test </button>
+            <button type="button" class="btn btn-info" id="btnUniGraf"> Graficar </button>
             <hr>
         </div>
     </div>
@@ -67,11 +83,25 @@
     <div class="collapse" id="collapseExponencial">
         <div class="container-fluid">
             <hr>
-            <span> Inputs </span>
+            <label style="display: block;" for="exp-lambda">Lambda:</label>
+            <input id="exp-lambda" placeholder="Semilla" style="margin: 0.5em;" type="number" />
+
+
+            <label style="display: block;" for="exp-n">N:</label>
+            <input id="exp-n" placeholder="Cantidad de nros" style="margin: 0.5em;" type="number" />
+
+            <label style="display: block;" for="intExp">Intervalos:</label>
+            <select id="intExp" class="form-select" aria-label="Default select example">
+                <option selected></option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
             <hr>
             <button type="button" class="btn btn-success" id="btnExpSim">Simular</button>
             <button type="button" class="btn btn-danger" id="btnExpDel">Reiniciar</button>
-            <button type="button" class="btn btn-info" id="btnExpTest"> Test </button>
+            <button type="button" class="btn btn-info" id="btnExpGraf"> Graficar </button>
             <hr>
         </div>
     </div>
@@ -79,11 +109,26 @@
     <div class="collapse" id="collapseNormal">
         <div class="container-fluid">
             <hr>
-            <span> Inputs </span>
+            <label style="display: block;" for="normal-media">Media:</label>
+            <input id="normal-media" placeholder="Semilla" style="margin: 0.5em;" type="number" />
+            <label style="display: block;" for="normal-desviacion">Desviación:</label>
+            <input id="normal-desviacion" placeholder="c" style="margin: 0.5em;" type="number" />
+
+            <label style="display: block;" for="normal-n">N:</label>
+            <input id="normal-n" placeholder="Cantidad de nros" style="margin: 0.5em;" type="number" />
+
+            <label style="display: block;" for="intNormal">Intervalos:</label>
+            <select id="intNormal" class="form-select" aria-label="Default select example">
+                <option selected></option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
             <hr>
             <button type="button" class="btn btn-success" id="btnNormalSim">Simular</button>
             <button type="button" class="btn btn-danger" id="btnNormalDel">Reiniciar</button>
-            <button type="button" class="btn btn-info" id="btnNormalTest"> Test </button>
+            <button type="button" class="btn btn-info" id="btnNormalGraf"> Graficar </button>
             <hr>
         </div>
     </div>
@@ -91,12 +136,44 @@
     <div class="collapse" id="collapsePoisson">
         <div class="container-fluid">
             <hr>
-            <span> Inputs </span>
+            <label style="display: block;" for="poisson-lambda">Lambda:</label>
+            <input id="poisson-lambda" placeholder="Semilla" style="margin: 0.5em;" type="number" />
+
+
+            <label style="display: block;" for="poisson-n">N:</label>
+            <input id="poisson-n" placeholder="Cantidad de nros" style="margin: 0.5em;" type="number" />
+
+            <label style="display: block;" for="intPoisson">Intervalos:</label>
+            <select id="intPoisson" class="form-select" aria-label="Default select example">
+                <option selected></option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
             <hr>
             <button type="button" class="btn btn-success" id="btnPoissonSim">Simular</button>
             <button type="button" class="btn btn-danger" id="btnPoissonDel">Reiniciar</button>
-            <button type="button" class="btn btn-info" id="btnPoissonTest"> Test </button>
+            <button type="button" class="btn btn-info" id="btnPoissonGraf"> Graficar </button>
             <hr>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div id="gridVariable" class="ag-theme-alpine my-2" style="height: 500px; width: 100%; "></div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div id="gridFrecuencia" class="ag-theme-alpine my-2" style="height: 500px; width: 100%;"></div>
+            <span id="dataL"></span>
+            <span id="resL"></span>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div id="gridGrafico" class="ag-theme-alpine my-2" style="height: 500px; width: 100%;"></div>
         </div>
     </div>
 
@@ -108,5 +185,11 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-1.5.0.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.js" charset="utf-8"></script>
+
+    <script type="module" src="./Generadores/normal.js"></script>
+    <script type="module" src="./Generadores/uniforme.js"></script>
+    <script type="module" src="./Generadores/exponencial.js"></script>
+    <script type="module" src="./Generadores/poisson.js"></script>
+    <script type="module" src="./graficos.js"></script>
 </body>
 </html>
