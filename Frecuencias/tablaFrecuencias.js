@@ -134,8 +134,9 @@ const sumatoria = (nros, minimo, maximo, int, paso) => {
         fila.lim_sup = Number(lim_sup);
         fila.fo = frecObs(nros, lim_inf, lim_sup);
         fila.fe = nros.length / int;
+        // TODO Esto no va
         fila.estadistico = ((fila.fe - fila.fo) ** 2) / fila.fe;
-
+        // esto tampoco
         suma = truncateDecimals((Number(suma) + Number(fila.estadistico)),4);
 
         filas.push(fila);
@@ -157,22 +158,4 @@ const frecObs = (nros, inf, sup) => {
     });
 
     return fo;
-}
-
-const prueba = (int, suma) => {
-    let v = int - 1;
-    let res = false;
-    let valor_tabla = 0;
-
-    chi.forEach((par) => {
-        if (par[0] === v) {
-            valor_tabla = par[1];
-        }
-    });
-
-    if (suma <= valor_tabla) {
-        res = true;
-    }
-
-    return [res, suma, valor_tabla];
 }
