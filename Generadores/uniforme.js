@@ -1,11 +1,14 @@
 const btnSimular = document.getElementById("btnUniSim");
 const btnUniDelete = document.getElementById("btnUniDel");
 const btnExportToExcelRandVar = document.getElementById("btnExportToExcelRandVar");
-const btnExportToExcelChi = document.getElementById("btnExportToExcelChi");
+const btnExportToExcelFrec = document.getElementById("btnExportToExcelFrec");
 
 let gridRandVarOptions = {};
-let gridChiOptions = {};
-let randUnif = [];
+var rndUnif;
+
+export const getRandomNumberUniforme = () => {
+    return [...rndUnif];
+}
 
 const truncateDecimals = (number, digits) => {
     const multiplier = Math.pow(10, digits);
@@ -15,7 +18,6 @@ const truncateDecimals = (number, digits) => {
 const distribucionUniforme = (a, b) => {
     return truncateDecimals(Math.random() * (b - a) + a, 4);
 }
-
 
 const generacionVariablesAleatoriasUniformes = (a, b, n) => {
     let variablesAleatorias = [];
@@ -50,7 +52,7 @@ const simularUniforme = () => {
 
     try {
         variablesAleatorias = generacionVariablesAleatoriasUniformes(a, b, n);
-        randUnif = [...variablesAleatorias];
+        rndUnif = [...variablesAleatorias];
     }
     catch (error) {
         alert('Oops! Ha ocurrido un error');
@@ -63,7 +65,7 @@ const simularUniforme = () => {
 
     gridRandVarOptions = {
         columnDefs,
-        rowData: variablesAleatorias
+        rowData: [...variablesAleatorias]
     };
 
     new agGrid.Grid(eGridDiv, gridRandVarOptions);
@@ -72,6 +74,7 @@ const simularUniforme = () => {
 
 const borrarTablaUniforme = () => {
     btnExportToExcelRandVar.setAttribute("hidden", "hidden");
+    btnExportToExcelFrec.setAttribute("hidden", "hidden");
     const eGridDiv = document.querySelector('#gridVariable');
 
     let child = eGridDiv.lastElementChild;
@@ -87,11 +90,6 @@ const exportToExcelRandVar = () => {
     gridRandVarOptions.api.exportDataAsExcel();
 }
 
-const exportToExcelChi = () => {
-    gridChiOptions.api.exportDataAsExcel();
-}
-
 btnExportToExcelRandVar.addEventListener("click", exportToExcelRandVar);
-btnExportToExcelChi.addEventListener("click", exportToExcelChi);
 btnUniDelete.addEventListener("click", borrarTablaUniforme);
 btnSimular.addEventListener("click", simularUniforme);

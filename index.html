@@ -48,9 +48,9 @@
     <a class="mx-2 btn btn-primary" data-bs-toggle="collapse" href="#collapseNormal" role="button" aria-expanded="false" aria-controls="collapseExample">
         Normal
     </a>
-    <a class="mx-2 btn btn-primary" data-bs-toggle="collapse" href="#collapsePoisson" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <!-- <a class="mx-2 btn btn-primary" data-bs-toggle="collapse" href="#collapsePoisson" role="button" aria-expanded="false" aria-controls="collapseExample">
         Poisson
-    </a>
+    </a> -->
 
 
     <div class="collapse" id="collapseUniforme">
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <div class="collapse" id="collapsePoisson">
+    <!-- <div class="collapse" id="collapsePoisson">
         <div class="container-fluid">
             <hr>
             <label style="display: block;" for="poisson-lambda">Lambda:</label>
@@ -156,7 +156,7 @@
             <button type="button" class="btn btn-info" id="btnPoissonGraf"> Graficar </button>
             <hr>
         </div>
-    </div>
+    </div> -->
 
     <div class="row justify-content-center">
         <div class="col-8">
@@ -169,7 +169,7 @@
             <div id="gridFrecuencia" class="ag-theme-alpine my-2" style="height: 500px; width: 100%;"></div>
             <span id="dataL"></span>
             <span id="resL"></span>
-            <button hidden="hidden" id="btnExportToExcelChi" class="btn btn-info" style="margin-bottom: 5px; font-weight: bold">Exportar a Excel</button>
+            <button hidden="hidden" id="btnExportToExcelFrec" class="btn btn-info" style="margin-bottom: 5px; font-weight: bold">Exportar a Excel</button>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -192,7 +192,6 @@
     <script type="module" src="./Generadores/normal.js"></script>
     <script type="module" src="./Generadores/uniforme.js"></script>
     <script type="module" src="./Generadores/exponencial.js"></script>
-    <script type="module" src="./Generadores/poisson.js"></script>
     <script type="module" src="./graficos.js"></script>
 </body>
 </html>
