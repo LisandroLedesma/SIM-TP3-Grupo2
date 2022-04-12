@@ -3,7 +3,11 @@ const btnNormalDelete = document.getElementById("btnNormalDel");
 
 let gridRandVarOptions = {};
 let gridChiOptions = {};
-let randUnif = [];
+let randNormal;
+
+export const getRandomNumberNormal = () => {
+    return [...randNormal];
+}
 
 const truncateDecimals = (number, digits) => {
     const multiplier = Math.pow(10, digits);
@@ -67,7 +71,7 @@ const simularNormal= () => {
 
     try {
         variablesAleatorias = generacionVariablesAleatoriasNormales(media, desviacion, n);
-        randUnif = [...variablesAleatorias];
+        randNormal = [...variablesAleatorias];
     }
     catch (error) {
         alert('Oops! Ha ocurrido un error');
