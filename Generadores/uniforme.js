@@ -76,11 +76,19 @@ const borrarTablaUniforme = () => {
     btnExportToExcelRandVar.setAttribute("hidden", "hidden");
     btnExportToExcelFrec.setAttribute("hidden", "hidden");
     const eGridDiv = document.querySelector('#gridVariable');
+    const fGridDiv = document.querySelector('#gridFrecuencia');
+    
 
     let child = eGridDiv.lastElementChild;
     while (child) {
         eGridDiv.removeChild(child);
         child = eGridDiv.lastElementChild;
+    }
+
+    let fchild = fGridDiv.lastElementChild;
+    while (fchild) {
+        fGridDiv.removeChild(fchild);
+        fchild = fGridDiv.lastElementChild;
     }
 }
 

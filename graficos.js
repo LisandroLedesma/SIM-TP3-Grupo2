@@ -1,7 +1,11 @@
 import { getRandomNumberUniforme } from "./Generadores/uniforme.js";
+import { getRandomNumberNormal } from "./Generadores/normal.js";
+import { getRandomNumberExp } from "./Generadores/exponencial.js";
 
 const btnExportToExcelFrec = document.getElementById('btnExportToExcelFrec');
 const btnUniGraf = document.getElementById('btnUniGraf');
+const btnExpGraf = document.getElementById('btnExpGraf');
+const btnNormalGraf = document.getElementById('btnNormalGraf');
 
 let gridOptions = {};
 
@@ -14,14 +18,12 @@ const getNumbers = (type) => {
 
     let arrNumb = [];
     if (type === "uniforme") arrNumb = getRandomNumberUniforme();
-    else if (type === "exponencial") arrNumb = [...rndExp];
-    else arrNumb = [...rndNormal];
-
+    else if (type === "exponencial") arrNumb = getRandomNumberExp();
+    else arrNumb = getRandomNumberNormal();
     let aux = [];
     arrNumb.forEach(rnd => {
         aux.push(rnd.Aleatorio);
     });
-
     return aux;
 }
 
@@ -61,6 +63,7 @@ const generarTabla = (filas) => {
     btnExportToExcelFrec.removeAttribute("hidden");
 }
 
+//****************************************************************************************
 const test = (type) => {
     let select = "";
     // const spanL = document.getElementById('resL');
@@ -70,14 +73,17 @@ const test = (type) => {
     if (type === "uniforme") select = document.getElementById("intUnif");
     else if (type === "exponencial") select = document.getElementById("intExp");
     else select = document.getElementById("intNormal");
-
+    console.log(numeros);
     const intervalos = select.value;
     numeros.sort();
-
+    let ayuda = numeros.sort();
+    console.log(ayuda);
     const max = numeros[numeros.length - 1];
     const min = numeros[0];
     const paso = Number(((max - min) / intervalos) + 0.0001);
-
+    console.log(max);
+    console.log(min);
+    console.log(paso);
     // let [suma, filas] = sumatoria(numeros, min, max, intervalos, paso);
     let filas = sumatoria(numeros, min, max, intervalos, paso);
 
@@ -174,3 +180,5 @@ const exportToExcelFrec = () => {
 
 btnExportToExcelFrec.addEventListener('click', exportToExcelFrec);
 btnUniGraf.addEventListener('click', () => {test("uniforme");});
+btnExpGraf.addEventListener('click', () => {test("exponencial");});
+btnNormalGraf.addEventListener('click', () => {test("normal");});
