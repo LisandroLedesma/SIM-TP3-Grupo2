@@ -73,18 +73,16 @@ const test = (type) => {
     if (type === "uniforme") select = document.getElementById("intUnif");
     else if (type === "exponencial") select = document.getElementById("intExp");
     else select = document.getElementById("intNormal");
-    console.log(numeros);
+
     const intervalos = select.value;
     numeros.sort();
     let orden = numeros.sort(function (a, b) {  return a - b;  });
 
-    console.log(orden);
+
     const max = orden[orden.length - 1];
     const min = orden[0];
     const paso = Number(((max - min) / intervalos) + 0.0001);
-    console.log(max);
-    console.log(min);
-    console.log(paso);
+
     // let [suma, filas] = sumatoria(numeros, min, max, intervalos, paso);
     let filas = sumatoria(orden, min, max, intervalos, paso);
 
