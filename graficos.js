@@ -40,6 +40,8 @@ const generarTabla = (filas) => {
 
     let rowData = [];
     filas.forEach((fila) => {
+        console.log(fila.fe);
+        console.log(typeof fila.fe);
         let row = {
             LimInf: fila.lim_inf,
             LimSup: fila.lim_sup,
@@ -103,6 +105,7 @@ const sumatoria = (nros, minimo, maximo, int, paso, type, media, desviacion, lam
     let min = minimo;
     let lim_inf = 0;
     let lim_sup = 0;
+    
 
     for (let i = 0; i < int; i++) {
         if (i == 0) {
@@ -122,13 +125,13 @@ const sumatoria = (nros, minimo, maximo, int, paso, type, media, desviacion, lam
         fila.fo = frecObs(nros, lim_inf, lim_sup);
 
         if (type === "uniforme") {
-            
-            fila.fe = truncateDecimals(nros.length / int, 4);
+            fila.fe = nros.length / int;
         }
         if (type === "normal") {
             let prob = ((Math.exp(-0.5 * ((fila.marca_clase - media) / desviacion ) ** 2)) / (desviacion * Math.sqrt(2 * Math.PI))) * (fila.lim_sup - fila.lim_inf);
             fila.fe = truncateDecimals(prob * nros.length, 4);
-        } else {
+        } 
+        if (type === "exponencial") {
             let dens = lambda * (Math.exp(-lambda*fila.marca_clase));
             let ancho = fila.lim_sup - fila.lim_inf;
             fila.fe = truncateDecimals((dens*ancho)*nros.length, 4);
