@@ -79,30 +79,25 @@ const test = (type) => {
         return a - b;
     });
 
+    let media = parseFloat(document.getElementById("normal-media").value);
+    let desviacion = parseFloat(document.getElementById("normal-desviacion").value);
+    let lambda = parseFloat(document.getElementById("exp-lambda").value);
+
+    
     const max = orden[orden.length - 1];
     const min = orden[0];
     const paso = Number((max - min) / intervalos + 0.0001);
 
-    // let [suma, filas] = sumatoria(numeros, min, max, intervalos, paso);
-    let filas = sumatoria(orden, min, max, intervalos, paso);
+    
+    let filas = sumatoria(orden, min, max, intervalos, paso, type, media, desviacion, lambda);
 
-    // let [res, sum, tabla] = prueba(intervalos, suma);
-
-    // sum = truncateDecimals(Number(sum), 4);
-
-    // spanLD.innerHTML = `<span>Estadistico: ${sum}. Valor de tabla: ${tabla}</span>`;
-
-    // if (res) {
-    //     spanL.innerHTML = `<span style="color: green">No se rechaza la hipotesis</span>`;
-    // } else {
-    //     spanL.innerHTML = `<span style="color: red">Se rechaza la hipotesis</span>`;
-    // }
+    
 
     generarTabla(filas);
     generarHistograma(filas, paso, type);
 };
 
-const sumatoria = (nros, minimo, maximo, int, paso) => {
+const sumatoria = (nros, minimo, maximo, int, paso, type, media, desviacion, lambda) => {
     let filas = [];
     // let suma = 0;
     let min = minimo;
@@ -125,11 +120,19 @@ const sumatoria = (nros, minimo, maximo, int, paso) => {
         fila.lim_inf = Number(lim_inf);
         fila.lim_sup = Number(lim_sup);
         fila.fo = frecObs(nros, lim_inf, lim_sup);
-        fila.fe = nros.length / int;
 
-        // fila.estadistico = ((fila.fe - fila.fo) ** 2) / fila.fe;
-
-        // suma = truncateDecimals((Number(suma) + Number(fila.estadistico)),4);
+        if (type === "uniforme") {
+            fila.fe = nros.length / int;
+        }
+        if (type === "normal") {
+            let prob = ((Math.exp(-0.5 * ((fila.marca_clase - media) / desviacion ) ** 2)) / (desviacion * Math.sqrt(2 * Math.PI))) * (fila.lim_sup - fila.lim_inf);
+            fila.fe = truncateDecimals(prob * nros.length, 4);
+        } else {
+            let dens = lambda * (Math.exp(-lambda*fila.marca_clase));
+            let ancho = fila.lim_sup - fila.lim_inf;
+            fila.fe = truncateDecimals((dens*ancho)*nros.length, 4);
+        }
+        
 
         filas.push(fila);
     }
