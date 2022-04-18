@@ -73,7 +73,7 @@ const test = (type) => {
     else if (type === "exponencial") select = document.getElementById("intExp");
     else select = document.getElementById("intNormal");
 
-    const intervalos = select.value;
+    const intervalos = parseInt(select.value);
     numeros.sort();
     let orden = numeros.sort(function (a, b) {
         return a - b;
@@ -122,7 +122,8 @@ const sumatoria = (nros, minimo, maximo, int, paso, type, media, desviacion, lam
         fila.fo = frecObs(nros, lim_inf, lim_sup);
 
         if (type === "uniforme") {
-            fila.fe = nros.length / int;
+            
+            fila.fe = truncateDecimals(nros.length / int, 4);
         }
         if (type === "normal") {
             let prob = ((Math.exp(-0.5 * ((fila.marca_clase - media) / desviacion ) ** 2)) / (desviacion * Math.sqrt(2 * Math.PI))) * (fila.lim_sup - fila.lim_inf);
