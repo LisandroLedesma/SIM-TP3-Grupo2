@@ -210,19 +210,14 @@ const generarHistograma = (filas, paso, type) => {
     let endValue = filas[filas.length - 1].lim_sup;
 
     var x1 = [];
-    var x2 = [];
+    
 
     //Carga frecuencias observadas
     for (var i = 0; i < randArr.length; i++) {
         x1[i] = Number(randArr[i]);
     }
 
-    //Carga frecuencias esperadas (es un hardcode dinamico)
-    let marcas_clase = filas.map((x) => x.marca_clase);
-    for (var i = 0; i < filas.length; i++) {
-        let aux = cargarValores(filas, marcas_clase[i]);
-        aux.map((x) => x2.push(x));
-    }
+    
 
     //Frecuencias observadas
     let trace1 = {
@@ -240,21 +235,7 @@ const generarHistograma = (filas, paso, type) => {
         },
     };
 
-    //Frecuencias esperadas
-    let trace2 = {
-        x: x2,
-        type: "histogram",
-        name: "Frecuencia Esperada",
-        marker: {
-            color: "rgb(100, 200, 102)",
-        },
-        opacity: 0.3,
-        xbins: {
-            end: endValue,
-            start: startValue,
-            size: paso,
-        },
-    };
+    
 
     let layout = {
         title: "Histograma de frecuencias para distribución " + type,
@@ -263,7 +244,7 @@ const generarHistograma = (filas, paso, type) => {
         yaxis: { title: "Frecuencia" },
     };
 
-    let data = [trace1, trace2];
+    let data = [trace1];
 
     let config = {
         responsive: true,
