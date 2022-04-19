@@ -55,7 +55,7 @@ const simularUniforme = () => {
     if (isNaN(a) || isNaN(b) || isNaN(n))
         return alert("Por favor, ingrese números.");
     // A puede ser igual que B????
-    if (a > b)
+    if (a >= b)
         return alert("El valor de 'a' debe ser menor que el valor de 'b'");
     if (n < 1) return alert("El valor de 'n' debe ser mayor que 0");
 
