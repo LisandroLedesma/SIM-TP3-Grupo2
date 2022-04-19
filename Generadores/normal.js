@@ -28,36 +28,31 @@ function generarRandomsUnif(cant_n){
             }
         }
         randoms.push(objRand)
-    
+
     }
-    //console.log(randoms);
     return randoms
 }
 
-const distribucionNormal = (media, desviacion, n) => {
-    //genero 2 random
-
-    let random = generarRandomsUnif(n) 
+const distribucionNormal = (media, desviacion, i) => {
 
     //Box muller
     let z = 0;
-    //let cont = 0;
 
-    for (let i = 0; i < n; i++) {
-        if (i % 2 == 0) {
-            z = ((Math.sqrt(-2 * Math.log(random[i].rnd1)) * Math.sin(2 * Math.PI * random[i].rnd2)) * desviacion) + media;
-            //z = z1;
-            //cont = cont + 1 
-        } else {
-            z = ((Math.sqrt(-2 * Math.log(random[i].rnd1)) * Math.cos(2 * Math.PI * random[i].rnd2)) * desviacion) + media;
-            //z = z2;
-            //cont = cont + 1
-        }
+    let rnd1 = truncateDecimals(Math.random(), 4);
+    while (rnd1 === 0) {
+        rnd1 = truncateDecimals(Math.random(), 4);
     }
-    
-    let var_aleatoria = z.toFixed(4);
-    //console.log(cont)
-    //console.log(var_aleatoria)
+
+    let rnd2 = truncateDecimals(Math.random(), 4);
+
+    if (i % 2 == 0) {
+        z = ((Math.sqrt(-2 * Math.log(rnd1)) * Math.sin(2 * Math.PI * rnd2)) * desviacion) + media;
+    } else {
+        z = ((Math.sqrt(-2 * Math.log(rnd1)) * Math.cos(2 * Math.PI * rnd2)) * desviacion) + media;
+    }
+
+    // let var_aleatoria = z.toFixed(4);
+    let var_aleatoria = truncateDecimals(z, 4);
 
     return var_aleatoria;
 };
@@ -69,7 +64,9 @@ const generacionVariablesAleatoriasNormales = (media, desviacion, n) => {
     for (let i = 0; i < n; i++) {
         randObj = {
             n: i + 1,
-            Aleatorio: Number(distribucionNormal(media, desviacion, n)),
+            // Aleatorio: Number(distribucionNormal(media, desviacion, n)),
+            // Aleatorio: Number(distribucionNormal(media, desviacion, i)),
+            Aleatorio: distribucionNormal(media, desviacion, i),
         };
 
         variablesAleatorias.push(randObj);

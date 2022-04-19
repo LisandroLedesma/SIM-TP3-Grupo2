@@ -40,8 +40,6 @@ const generarTabla = (filas) => {
 
     let rowData = [];
     filas.forEach((fila) => {
-        console.log(fila.fe);
-        console.log(typeof fila.fe);
         let row = {
             LimInf: fila.lim_inf,
             LimSup: fila.lim_sup,
@@ -71,6 +69,7 @@ const test = (type) => {
     // const spanLD = document.getElementById('dataL');
 
     const numeros = getNumbers(type);
+
     if (type === "uniforme") select = document.getElementById("intUnif");
     else if (type === "exponencial") select = document.getElementById("intExp");
     else select = document.getElementById("intNormal");
@@ -85,15 +84,15 @@ const test = (type) => {
     let desviacion = parseFloat(document.getElementById("normal-desviacion").value);
     let lambda = parseFloat(document.getElementById("exp-lambda").value);
 
-    
+
     const max = orden[orden.length - 1];
     const min = orden[0];
     const paso = Number((max - min) / intervalos + 0.0001);
 
-    
+
     let filas = sumatoria(orden, min, max, intervalos, paso, type, media, desviacion, lambda);
 
-    
+
 
     generarTabla(filas);
     generarHistograma(filas, paso, type);
@@ -105,7 +104,6 @@ const sumatoria = (nros, minimo, maximo, int, paso, type, media, desviacion, lam
     let min = minimo;
     let lim_inf = 0;
     let lim_sup = 0;
-    
 
     for (let i = 0; i < int; i++) {
         if (i == 0) {
@@ -130,13 +128,13 @@ const sumatoria = (nros, minimo, maximo, int, paso, type, media, desviacion, lam
         if (type === "normal") {
             let prob = ((Math.exp(-0.5 * ((fila.marca_clase - media) / desviacion ) ** 2)) / (desviacion * Math.sqrt(2 * Math.PI))) * (fila.lim_sup - fila.lim_inf);
             fila.fe = truncateDecimals(prob * nros.length, 4);
-        } 
+        }
         if (type === "exponencial") {
             let dens = lambda * (Math.exp(-lambda*fila.marca_clase));
             let ancho = fila.lim_sup - fila.lim_inf;
             fila.fe = truncateDecimals((dens*ancho)*nros.length, 4);
         }
-        
+
 
         filas.push(fila);
     }
@@ -194,15 +192,6 @@ btnNormalGraf.addEventListener("click", () => {
 //****************************************************************************************
 // Graficos
 
-//Carga frecuencias esperadas (es un hardcode dinamico)
-const cargarValores = (filas, marca_clase) => {
-    let aux = [];
-    for (var i = 0; i < filas[0].fe; i++) {
-        aux.push(marca_clase);
-    }
-    return aux;
-};
-
 const generarHistograma = (filas, paso, type) => {
     let randArr = getNumbers(type);
 
@@ -210,14 +199,12 @@ const generarHistograma = (filas, paso, type) => {
     let endValue = filas[filas.length - 1].lim_sup;
 
     var x1 = [];
-    
+
 
     //Carga frecuencias observadas
     for (var i = 0; i < randArr.length; i++) {
         x1[i] = Number(randArr[i]);
     }
-
-    
 
     //Frecuencias observadas
     let trace1 = {
@@ -234,8 +221,6 @@ const generarHistograma = (filas, paso, type) => {
             size: paso,
         },
     };
-
-    
 
     let layout = {
         title: "Histograma de frecuencias para distribución " + type,
