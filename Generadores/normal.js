@@ -17,23 +17,48 @@ const truncateDecimals = (number, digits) => {
     return Math.trunc(number * multiplier) / multiplier;
 };
 
+function generarRandomsUnif(cant_n){
+    let objRand = {}
+    let randoms = []
+    for (let i = 0; i < cant_n; i++) {
+        if (i % 2 == 0) {
+            objRand = {
+                rnd1: truncateDecimals(Math.random(), 4),
+                rnd2: truncateDecimals(Math.random(), 4),
+            }
+        }
+        randoms.push(objRand)
+    
+    }
+    //console.log(randoms);
+    return randoms
+}
+
 const distribucionNormal = (media, desviacion, n) => {
     //genero 2 random
-    let rnd1 = truncateDecimals(Math.random(), 4);
-    let rnd2 = truncateDecimals(Math.random(), 4);
+
+    let random = generarRandomsUnif(n) 
 
     //Box muller
-    let z1 = Math.sqrt(-2 * Math.log(rnd1)) * Math.sin(2 * Math.PI * rnd2);
-    let z2 = Math.sqrt(-2 * Math.log(rnd1)) * Math.cos(2 * Math.PI * rnd2);
     let z = 0;
+    //let cont = 0;
 
-    if (n % 2 == 0) {
-        z = z1;
-    } else {
-        z = z2;
+    for (let i = 0; i < n; i++) {
+        if (i % 2 == 0) {
+            z = ((Math.sqrt(-2 * Math.log(random[i].rnd1)) * Math.sin(2 * Math.PI * random[i].rnd2)) * desviacion) + media;
+            //z = z1;
+            //cont = cont + 1 
+        } else {
+            z = ((Math.sqrt(-2 * Math.log(random[i].rnd1)) * Math.cos(2 * Math.PI * random[i].rnd2)) * desviacion) + media;
+            //z = z2;
+            //cont = cont + 1
+        }
     }
+    
+    let var_aleatoria = z.toFixed(4);
+    //console.log(cont)
+    //console.log(var_aleatoria)
 
-    let var_aleatoria = (media + desviacion * z).toFixed(4);
     return var_aleatoria;
 };
 
